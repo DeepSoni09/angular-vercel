@@ -1,0 +1,10 @@
+<app-carousal></app-carousal>
+<!-- <app-search (valuesearch)  ="getsearch($event)"></app-search> -->
+<!-- <app-courses [getsearchvalue]="eventcatchparent"></app-courses> -->
+
+<app-courses #ref (transferdetails)="receivedata($event)"></app-courses>
+<app-course-detail [finaldata]="senddata" ></app-course-detail>
+
+
+<!-- <app-courses #ref></app-courses>
+<app-course-detail [access]="tryaccess" ></app-course-detail> -->
