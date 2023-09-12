@@ -1,49 +1,60 @@
-<!-- drawer component -->
-<div id="drawer-right-example"
-    class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-96 dark:bg-gray-800"
-    tabindex="-1" aria-labelledby="drawer-right-label">
-    <h5 id="drawer-right-label"
-        class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+<div class="d-flex justify-center items-center w-100 text-center">
+    <h1 class="inline-flex items-center my-4 text-5xl font-semibold text-gray-500 dark:text-gray-400">
         Course Details
-    </h5>
-    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
-        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-        <span class="sr-only">Close menu</span>
-    </button>
-    <img [src]="finaldata.img" class="d-flex justify-center text-center">
+    </h1>
+    <div class="flexing">
 
-    <h3 class="text-3xl font-bold dark:text-white my-4">{{finaldata.title}}</h3>
-    <div class="flex gap-14">
-        
+        <img [src]="course.img" class="w-80">
+    </div>
+
+    <h3 class="text-3xl font-bold dark:text-white my-4" *ngIf="!editMode">{{course.title}}</h3>
+    <input *ngIf="editMode" type="text" [(ngModel)]="course.title">
+    <button (click)="edit()">Edit</button>
+    <button [routerLink]="['/courses/course',course.id]" (click)="editMode=false">Update</button>
+    <div class="flexing flex gap-14 my-4">
+
         <p class="text-center text-gray-800 dark:text-white text-2xl mt-1 font-bold"
-        [ngStyle]="{color:finaldata.type === 'Free'?'green':'red'}">{{finaldata.type}}</p>
+            [ngStyle]="{color:course.type === 'Free'?'green':'red'}">{{course.type}}</p>
         <p class="text-center text-gray-800 dark:text-white text-2xl mt-1 font-bold">
-            {{finaldata.price}}
+            {{course.price}}
         </p>
     </div>
-    <p class="mb-3 text-gray-500 dark:text-gray-400">{{finaldata.desc}}</p>
-    <!-- <span
-        class="mt-3 flex items-center justify-center text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"
-        [ngStyle]="{background: finaldata.available==='Available' ?'rgb(220 252 231)':'rgb(254 226 226)' , color: finaldata.available==='Available' ?'rgb(22 101 52)':'rgb(153 27 27)'}">
-        <span class="w-2 h-2 mr-1 bg-red-500 rounded-full"
-            [ngStyle]="{background: finaldata.available === 'Available' ? 'rgb(34 197 94)' : 'rgb(220 38 38)'}">
-        </span>
-        {{finaldata.available}}
-    </span> -->
+    <div class="flexing mb-3">
+
+        <button *ngIf="course.type ==='Free' ;else addtokart"
+            class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50 mt-4 w-80 flex items-center justify-center">
+            Learn for free
+        </button>
+        <ng-template #addtokart>
+
+            <button
+                class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50 mt-4 w-80 flex items-center justify-center">
+                Add to Cart<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            </button>
+        </ng-template>
+    </div>
+    <p class="mb-3 text-gray-500 dark:text-gray-400">{{course.desc}}</p>
 
 
-    <p class="mb-3 text-gray-500 dark:text-gray-400">Track work across the enterprise through an open, collaborative
+
+    <p class="mb-3 mx-10 text-gray-500 dark:text-gray-400">Track work across the enterprise through an open,
+        collaborative
         platform. Link issues across Jira and ingest data from other software development tools, so your IT support
         and operations teams have richer contextual information to rapidly respond to requests, incidents, and
         changes.</p>
-    <p class="text-gray-500 dark:text-gray-400">Deliver great service experiences fast - without the complexity of
+    <p class="mb-3 mx-10 text-gray-500 dark:text-gray-400">Deliver great service experiences fast - without the
+        complexity of
         traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with
         ease, with a complete audit trail for every change.</p>
 
     <div class="grid grid-cols-2 gap-4">
     </div>
 </div>
+
+<a routerLink="/courses/course/1">Go to</a>
+
+<!-- <div>{{course.title}}</div> -->

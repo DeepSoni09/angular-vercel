@@ -13,6 +13,13 @@ import { CoursesComponent } from './courses/courses.component';
 import { FilterComponent } from './filter/filter.component';
 import { SearchComponent } from './search/search.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes:Routes = [
+  {path:'', component: HeaderComponent},
+  {path:'courses/course/:id', component: CourseDetailComponent},
+  {path:'courses',component: CoursesComponent},
+]
 
 @NgModule({
   declarations: [
@@ -30,7 +37,8 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
